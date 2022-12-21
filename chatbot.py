@@ -5,10 +5,11 @@ def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
         return infile.read()
 
-openai.api_key = 'API-KEY'
 
-def gpt3_completion(prompt, engine='text-davinci-003', temp=0.7, top_p=1.0, tokens=400, freq_pen=0.0, pres_pen=0.0,
-                    stop=['DALIA:', 'USER:']):
+openai.api_key = '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'
+
+
+def gpt3_completion(prompt, engine='text-davinci-003', temp=0.7, top_p=1.0, tokens=400, freq_pen=0.0, pres_pen=0.0,stop=['THEMISAPP:', 'USER:']):
     prompt = prompt.encode(encoding='ASCII', errors='ignore').decode()
     response = openai.Completion.create(
         engine=engine,
@@ -28,9 +29,8 @@ if __name__ == '__main__':
       user_input = input('USER : ')
       conversation.append('USER : %s' % user_input)
       text_block = '\n'.join(conversation)
-      prompt = open_file('prompt_chat.txt').replace('<<BLOCK>>' , text_block)
-      prompt = prompt + '\nJAX'
-      # gpt3_completion(user_input)
-
-    response = gpt3_completion(prompt)
-    print(response)
+      prompt = open_file('prompt_chat.txt').replace('<<BLOCK>>', text_block)
+      prompt = prompt + '\nHAMMAD : '
+      response = gpt3_completion(prompt)
+      print('HAMMAD: ', response)
+      conversation.append('HAMMAD : %s' % response);
